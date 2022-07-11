@@ -1,0 +1,32 @@
+:root {
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	padding: 30px;
+	gap: 20px;
+}
+
+.card {
+	padding: 20px;
+	text-align: center;
+	background-color: aqua;
+	border-radius: 8px;
+	border: 1px solid darkcyan;
+}
+
+.card-add {
+	display: grid;
+	align-content: center;
+	justify-content: center;
+}
