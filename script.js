@@ -1,5 +1,23 @@
-const book = (title, author, pages, read)  => {
-	return Object.assign({title, author, pages, read})
+const setter = (state) => ({
+	set: (name, value) => state[name] = value
+})
+
+const getter = (state) => ({
+	get: (name) => state[name]
+})
+
+const book = ({title, author, read}) => {
+	const state = {
+		title,
+		author,
+		read
+	}
+	
+	return Object.assign(
+		{},
+		setter(state),
+		getter(state),
+	);
 }
 
 const myLibrary = (function() {
