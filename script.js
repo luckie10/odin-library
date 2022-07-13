@@ -6,7 +6,7 @@ const getter = (state) => ({
 	get: (name) => state[name]
 })
 
-const book = ({title, author, read}) => {
+const bookFactory = (title, author, read) => {
 	const state = {
 		title,
 		author,
@@ -26,17 +26,15 @@ const myLibrary = (function() {
 	const mainContainer = document.querySelector("main.container");
 	const cardAdd = mainContainer.querySelector('.card-add');
 
-	const AGoT = book(
+	const AGoT = bookFactory(
 		"A Game of Thrones",
 		"George R. R. Martin",
-		834,
 		false
 	);
 
-	const leviathanWakes = book(
+	const leviathanWakes = bookFactory(
 		"Leviathan Wakes",
 		"James S. A. Corey",
-		577,
 		true
 	);
 	
