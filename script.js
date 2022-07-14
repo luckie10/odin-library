@@ -55,19 +55,22 @@ const myLibrary = (function() {
 		}
 	}
 
-	function createBookCard(libBook) {
+	function createBookCard(book) {
 		const card = document.createElement('div');
+		const title = document.createElement('p');
+		const author = document.createElement('p');
+		const read = document.createElement('p');
+
 		card.classList.add('card');
 		
-		Object.values(libBook).forEach(value => appendElement(value));
-		mainContainer.insertBefore(card, cardAdd);
-
-		function appendElement(content) {
-			const element = document.createElement('div');
-			element.textContent = content;
-			card.appendChild(element);
-		}
-
+		title.textContent = book.get('title');
+		author.textContent = book.get('author');
+		read.textContent = book.get('read');
+		
+		card.appendChild(title);
+		card.appendChild(author);
+		card.appendChild(read);
+		mainContainer.appendChild(card);
 	}
 	
 	function createNewBookCard() {
