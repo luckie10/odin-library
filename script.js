@@ -73,17 +73,5 @@ const myLibrary = (function() {
 		mainContainer.appendChild(card);
 	}
 	
-	function createNewBookCard() {
-		const card = document.createElement('div');
-		card.classList.add('card');
-		card.classList.add('card-add');
-
-		const button = document.createElement('button');
-		button.textContent = 'New Book';
-		card.appendChild(button);
-
-		mainContainer.appendChild(card);
-	}
-	
 	return {};
 })();
