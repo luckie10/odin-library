@@ -10,6 +10,10 @@
 	padding: 0;
 }
 
+html {
+	position: relative;
+}
+
 .container {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -25,8 +29,25 @@
 	border: 1px solid darkcyan;
 }
 
-.card-add {
-	display: grid;
-	align-content: center;
-	justify-content: center;
+.new-book-container {
+	background-color: grey;
+	position: fixed;
+	z-index: 1;
+	top: 40%;
+	left: calc(50% - (300px/2));
+	width: 300px;
+	text-align: center;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+}
+
+.active {
+	display: flex;
+}
+
+.new-book-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
