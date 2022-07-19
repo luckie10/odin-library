@@ -50,11 +50,6 @@ const myLibrary = (function library() {
     newBookContainer.classList.remove('active');
   }
 
-  function deleteBook() {
-    const cardElement = this.closest('.card');
-    const title = cardElement.querySelector('.title').textContent;
-  }
-
   function getBookFromInput() {
     const title = titleInput.value;
     const author = authorInput.value;
@@ -110,6 +105,16 @@ const myLibrary = (function library() {
 
     resetInputFields();
     closeNewBookForm();
+    render();
+  }
+
+  function deleteBook() {
+    const cardElement = this.closest('.card');
+    const title = cardElement.querySelector('.title').textContent;
+
+    const index = books.findIndex(book => book.get('title') === title);
+    books.splice(index, 1);
+
     render();
   }
 
