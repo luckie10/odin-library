@@ -16,7 +16,14 @@ const bookFactory = (title, author, read) => {
     read,
   };
 
-  return { ...setter(state), ...getter(state) };
+  return {
+    toggleRead: () => {
+      if (state.read) state.read = false;
+      else state.read = true;
+    },
+    ...setter(state),
+    ...getter(state),
+  };
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -70,11 +77,16 @@ const myLibrary = (function library() {
     }
   }
 
+  function getBookTitle(element) {
+    const cardElement = element.closest('.card');
+    return cardElement.querySelector('.title').textContent;
+  }
+
   function createBookCard(book) {
     const card = document.createElement('div');
     const title = document.createElement('p');
     const author = document.createElement('p');
-    const read = document.createElement('p');
+    const read = document.createElement('button');
     const deleteButton = document.createElement('button');
 
     card.classList.add('card');
@@ -82,10 +94,12 @@ const myLibrary = (function library() {
 
     title.textContent = book.get('title');
     author.textContent = book.get('author');
-    read.textContent = book.get('read');
     deleteButton.textContent = 'Delete';
+    if (!book.get('read')) read.textContent = 'Mark Read';
+    else read.textContent = 'Done';
 
     deleteButton.addEventListener('click', deleteBook);
+    read.addEventListener('click', markRead);
 
     card.appendChild(title);
     card.appendChild(author);
@@ -109,12 +123,20 @@ const myLibrary = (function library() {
   }
 
   function deleteBook() {
-    const cardElement = this.closest('.card');
-    const title = cardElement.querySelector('.title').textContent;
+    const title = getBookTitle(this);
 
-    const index = books.findIndex(book => book.get('title') === title);
+    const index = books.findIndex((book) => book.get('title') === title);
     books.splice(index, 1);
 
+    render();
+  }
+
+  function markRead() {
+    const title = getBookTitle(this);
+
+    books.forEach((book) => {
+      if (book.get('title') === title) book.toggleRead();
+    });
     render();
   }
 
