@@ -1,30 +1,24 @@
-const setter = (state) => ({
-  set: (name, value) => {
-    // eslint-disable-next-line no-param-reassign
-    state[name] = value;
-  },
-});
+class Book {
+  #properties = {};
 
-const getter = (state) => ({
-  get: (name) => state[name],
-});
+  constructor(title, author, read) {
+    this.#properties.title = title;
+    this.#properties.author = author;
+    this.#properties.read = read;
+  }
 
-const bookFactory = (title, author, read) => {
-  const state = {
-    title,
-    author,
-    read,
-  };
+  set(name, value) {
+    this.#properties[name] = value;
+  }
 
-  return {
-    toggleRead: () => {
-      if (state.read) state.read = false;
-      else state.read = true;
-    },
-    ...setter(state),
-    ...getter(state),
-  };
-};
+  get(name) {
+    return this.#properties[name];
+  }
+
+  toggleRead() {
+    this.#properties.read = !this.#properties.read;
+  }
+}
 
 // eslint-disable-next-line no-unused-vars
 const myLibrary = (function library() {
@@ -39,8 +33,8 @@ const myLibrary = (function library() {
   const submitNewBookButton =
     newBookContainer.querySelector('.submit-new-book');
 
-  const AGoT = bookFactory('A Game of Thrones', 'George R. R. Martin', false);
-  const leviathanWakes = bookFactory(
+  const AGoT = new Book('A Game of Thrones', 'George R. R. Martin', false);
+  const leviathanWakes = new Book(
     'Leviathan Wakes',
     'James S. A. Corey',
     true
@@ -62,7 +56,7 @@ const myLibrary = (function library() {
     const author = authorInput.value;
     const read = readInput.checked;
 
-    return bookFactory(title, author, read);
+    return new Book(title, author, read);
   }
 
   function resetInputFields() {
